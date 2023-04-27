@@ -2,6 +2,7 @@ package com.kh.spring.member.model.vo;
 
 import java.sql.Date;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 /*
@@ -19,6 +20,7 @@ import lombok.Data;
  * - 필드명 작성시 소문자가 두글자 이상으로 시작해야함
  * - el표기법 사용시 내부적으로 getter메소드를 찾게되는데 이때 getuName(), getbTitle()이라는 이름으로 메소드를 호출하기 때문에
  */
+import lombok.NoArgsConstructor;
 
 //@NoArgsConstructor // 기본생성자
 //@AllArgsConstructor // 모든 필드를 매개변수로 갖는 생성자
@@ -26,7 +28,10 @@ import lombok.Data;
 //@Getter // getter메서드 자동 생성
 //@ToString // toString 자동 생성
 //@EqualsAndHashCode // equals, Hashcode 자동생성
-@Data // 위의 어노테이션 전부를 포함한 것
+
+@Data // @Setter @Getter @ToString @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Member {
 	
