@@ -4,7 +4,7 @@
 	<!-- 
 		pom.xml 구조 : 프로젝트에 대한 정보
 					  groupId : 2번째 레벨까지의 패키지 구조(com.kh)
-					  artifactId : 3번째 페벨의 패키지명(프로그램명)
+					  artifactId : 3번째 레벨의 패키지명(프로그램명)
 					  packaging  : 배포할 때 압축 형식
 	 -->
 	<modelVersion>4.0.0</modelVersion>
@@ -208,7 +208,37 @@
 		    <version>1.1.2</version>
 		</dependency>
 		
+		<!-- 스프링 시큐리티 라이브러리(core, web, config) -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>5.7.5</version>
+		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>5.7.5</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>5.7.5</version>
+		</dependency>
+		
+		<!-- GSON -->
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.9.0</version>
+		</dependency>
+
+
 		
 	</dependencies>
     <build>
@@ -230,9 +260,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
+                <version>3.8.1</version> <!-- 2.x버전은 자바 1.6버전 아래에서 사용, 1.6버전이상시 3.0이상 버전을 사용하면 된다 -->
                 <configuration>
-                    <source>${java-version}</source>
+                    <source>${java-version}</source> <!-- source,target은 현재 사용하는 jdk버전에 맞춰서 작성 -->
                     <target>${java-version}</target>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>

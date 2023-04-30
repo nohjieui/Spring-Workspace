@@ -47,7 +47,7 @@ public class initFilter extends HttpFilter implements Filter {
 		
 		// 3. 세팅하기 --> application 스코프에 contextPath경로 저장
 		application.setAttribute("contextPath", contextPath);
-		System.out.println(contextPath);
+		//System.out.println(contextPath);
 		chain.doFilter(request, response);
 	}
 
