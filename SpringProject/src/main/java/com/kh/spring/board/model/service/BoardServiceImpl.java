@@ -51,4 +51,21 @@ public class BoardServiceImpl implements BoardService{
 	public int updateReadCount(int boardNo) {
 		return boardDao.updateReadCount(boardNo);
 	}
+	
+	// 게시글 검색
+	public void selectSearchList(int currentPage, String boardCode, Map<String, Object> map){
+		
+
+		int listCount = boardDao.selectBoardListCount(boardCode);
+		
+		int pageLimit = 10;
+		int boardLimit = 5;
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+		
+		ArrayList<Board> list = boardDao.selectSearchList(pi, boardCode);
+		map.put("pi", pi);
+		map.put("list", list);
+		
+	}
+	
 }

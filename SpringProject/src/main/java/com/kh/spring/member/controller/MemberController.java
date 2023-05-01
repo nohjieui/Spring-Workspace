@@ -34,10 +34,25 @@ public class MemberController {
 	//private MemberService ms = new MemberServiceImpl();
 	// 기존 객체 생성 방식. 서비스가 동시에 많은 횟수의 요청이 들어오면 그만큼의 객체가 생성됨
 	// 객체간의 결합도가 올라감
+	/*
+	 * MemberController 객체가 생성됨
+	 * 특정 1명의 사용자가 요청해 MemberController객체가 생성이되면
+	 * 그 객체 안에는 MemberServiceImpl()를 heap영역안에 새로운 주소값 할당하면서
+	 * 그 주소값을 MemberService 변수(ms)안에 저장하는 역할을 함
+	 * 
+	 * MemberController가 많이 호출되면 될수록 생성되는 객체도 요청수만큼 늘어나게 되는것이
+	 * 객체간의 결합도가 올라간다는 뜻을 의미함
+	 */
 	
 	// Spring의 DI(Dependency Injection) => 객체를 스프링에서 생성해서 주입을 해주는 개념
+	/*
+	 * Spring의 DI라는 개념을 풀어서 말하자면
+	 * 스프링에서는 결합도를 낮추기 위해 스프링에  bean으로 등록해둔
+	 * ex)MemberController, MemberServiceImpl 객체를 딱 '1번' 생성하고
+	 * 필요할때마다 생성된 객체의 주소값을 요청자에게 주입해주는 역할을 함
+	 */
 	// @Autowired
-	// -> new 연산자를 쓰지않고 필드 선언만 한 수 @Autowired라는 어노테이션을 붙여서 내가 필요로하는
+	// -> new 연산자를 쓰지않고 필드 선언만 한 후 @Autowired라는 어노테이션을 붙여서 내가 필요로하는
 	// 객체를 스프링 컨테이너로부터 주입받을 수 있음
 	
 	/*
@@ -51,11 +66,11 @@ public class MemberController {
 	 * 1. 필드방식 의존성(객체)
 	 * 필드방식 의존성 주입 장점 :이해하기 편하다, 사용하기 편하다
 	 * 
-	 * 				  단점 : 1)순환 의존성 문제가 발생할 수 있다.
+	 * 				  단점 : 1)순환 의존성 문제가 발생할 수 있다.(MemberServiceImpl 참고)
 	 * 				  		2)무분별한 주입시 의존관계 확인이 어렵다.
 	 */
 	//@Autowired // bean으로 등록된 객체중 타입이 같거나, 상속관계인 bean을 자동으로 주입해주는 역할
-	private MemberService memberService;
+	private MemberService memberService; // memberServiceImpl객체가 들어가있음(memberService는 interface로 객체생성이 불가능하기 때문)
 	
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
@@ -86,7 +101,7 @@ public class MemberController {
 	 * 필요할 때마다 의존성을 주입받아서 사용할 때. 즉, 의존성주입이 필수가 아닌 선택사항일때 사용
 	 */
 	@Autowired
-	public void seMemberService(MemberService memberService) {
+	public void setMemberService(MemberService memberService) {
 		this.memberService = memberService;
 	}
 	
@@ -161,35 +176,37 @@ public class MemberController {
 	 * @ModelAttribute 생략시 해당 객체를 커맨드객체라고 부른다
 	 */
 //	@RequestMapping("/login")
-//	public String loginMember(@ModelAttribute Member m) {
-//		
-//		return "main";
-//	}
-//	@RequestMapping("/login")
-//	public String loginMember(Member m, Model model) {
-//		
-//		// 요청 처리 후 응답데이터를 담고 응답페이지로 포워딩 또는 url 재요청하는 방법
-//		// 1) Model 객체 이용 -> 매개변수에 요청하면됨
-//		// 포워딩할 응답뷰로 전달하고자하는 데이터를 맵형식으로 담을 수 있는 영역 -> Model객체(requestScope)
-//		// Model : 데이터를 맵형식(k:v)형태로 담아 전달하는 용도의 객체
-//		// request, session을 대체하는 객체
-//		
-//		// model클래스 안의 addAttribute()메서드를 이용하는 방법
-//		model.addAttribute("errorMas", "오류발생"); // == request.setAttribute("errorMsg", "오류발생");
-//		
-//		// Model의 기본 scope는 request scope임.
-//		// 단, session scope로 변환하고 싶은 경우
-//		// 클래스 레벨로 @SessionAttributes를 작성하면 된다
-//		model.addAttribute("loginMember", m); // == request.getSession().setAttribute...
+//	public String loginMember(@ModelAttribute Member m) { // @ModelAttribute 생략가능
 //		
 //		System.out.println(m);
 //		return "main";
 //	}
 	
+	@RequestMapping("/login")
+	public String loginMember(Member m, Model model) {
+		
+		// 요청 처리 후 응답데이터를 담고 응답페이지로 포워딩 또는 url 재요청하는 방법
+		// 1) Model 객체 이용 -> 매개변수에 요청하면됨
+		// 포워딩할 응답뷰로 전달하고자하는 데이터를 맵형식으로 담을 수 있는 영역 -> Model객체(requestScope)
+		// Model : 데이터를 맵형식(k:v)형태로 담아 전달하는 용도의 객체
+		// request, session을 대체하는 객체
+		
+		// model클래스 안의 addAttribute()메서드를 이용하는 방법
+		model.addAttribute("errorMas", "오류발생"); // == request.setAttribute("errorMsg", "오류발생");
+		
+		// Model의 기본 scope는 request scope임.
+		// 단, session scope로 변환하고 싶은 경우
+		// 클래스 레벨로 @SessionAttributes를 작성하면 된다
+		model.addAttribute("loginUser", m); // == request.getSession().setAttribute...
+		
+		System.out.println(m);
+		return "main";
+	}
+	
 	// 2) ModelAndView 객체 이용
 	
 	// ModelAndView에서 Model은 데이터를 key-value로 담을 수 있는 Model객체를 의미함
-	// View는 응답뷰에 대한 정보를 담을 수 있다. 이때는 리턴타입이 STring이 아닌 ModelAndView로 전달해야함
+	// View는 응답뷰에 대한 정보를 담을 수 있다. 이때는 리턴타입이 String이 아닌 ModelAndView로 전달해야함
 	// Model + View가 결합된 형태의 객체 Model객체는 단독사용이 가능하지만, View는 불가능함
 	// mv.addObject("errorPage", "로그인실패");
 	// mv.setViewName("common/errorPage");

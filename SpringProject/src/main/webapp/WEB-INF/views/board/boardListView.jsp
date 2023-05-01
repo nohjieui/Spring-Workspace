@@ -81,7 +81,7 @@
 								</c:if>
 								${b.boardTitle }
 							</td>
-							<td>${b.boardWriter }</td>
+							<td>${b.nickName }</td>
 							<td>${b.count }</td>
 							<td>${b.createDate }</td>
 						</tr>

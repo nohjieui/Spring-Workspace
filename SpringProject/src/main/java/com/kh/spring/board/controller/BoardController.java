@@ -49,7 +49,7 @@ public class BoardController {
 		System.out.println(paramMap);
 		Map<String, Object> map = new HashMap();
 		// 게시글 목록 조회 서비스 호출시 작업 내용
-		// 1) 게시판 이름 조회
+		// 1) 게시판 이름 조회(2,3은 Dao에 있음)
 		
 		// 검색 요청을 하지 않은 경우
 		if(paramMap.get("condition") == null) {
@@ -57,7 +57,7 @@ public class BoardController {
 		}else {
 			// 검색 요청을 한 경우
 			// 검색 조건을 추가한 상태로 게시글 셀렉트?
-			
+			boardService.selectSearchList(currentPage, boardCode, map);
 		}
 		
 		
@@ -135,6 +135,7 @@ public class BoardController {
 		model.addAttribute("b", detail);
 		return "board/boardDetailView";
 	}
+	
 }
 
 

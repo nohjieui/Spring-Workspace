@@ -16,4 +16,6 @@ public interface BoardService {
 	public Board selectBoardDetail(int boardNo);
 	
 	public int updateReadCount(int boardNo);
+	
+	public void selectSearchList(int currentPage, String boardCode, Map<String, Object> map);
 }

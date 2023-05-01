@@ -21,9 +21,11 @@
 		매번 같은 주소(/WEB-INF/views/)를 추가해야하기 때문에 자동완성이 기본적으로 등록되어있음
 		- view resolver라는 도구를 등록(spring제공)
 		- class : InternalResourceViewResolver
+		- prifix : 접두어 / suffix : 접미어
 		- return할 파일명을 제시하는 부분에 접두어, 접미어를 붙여서 forward하겠다.
 	 -->
-
+	<!-- InternalResourceViewResolver 객체
+		-> return 값으로 문자열을 받았을 때 앞(/WEB-INF/views/)뒤(.jsp)에 ()안의 문자가 붙음 -->
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -32,6 +34,7 @@
 	
 	<!-- 
 		base-package에 등록된 패키지와 그 하위 패키지 모두 감시(scan)해서 빈으로 등록 가능한 클래스들은 spring-bean으로 등록해둠
+		(com.kh.spring패키지 아래에 있는 모든 클래스들을 훑어보면서 어노테이션이(@Controller, @Service) 있으면 bean객체로 등록해둠)
 	 -->
 	<context:component-scan base-package="com.kh.spring" />
 	

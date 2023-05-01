@@ -116,4 +116,37 @@
 		   SET COUNT = COUNT + 1
 		 WHERE BOARD_NO = #{boardNo}
 	</update>
+	
+	<select id="selectSearchList" parameterType="hashMap" resultMap="boardResultSet">
+		SELECT BOARD_NO,
+			   BOARD_TITLE,
+			   BOARD_WRITER,
+			   
+			   NICK_NAME,
+			   COUNT,
+			   B.CREATE_DATE,
+			   (
+					SELECT CHANGE_NAME
+					  FROM BOARD_IMG
+					 WHERE BOARD_NO = REF_BNO
+					   AND IMG_LEVEL = 0
+			   ) THUMBNAIL
+		  FROM BOARD B
+		  JOIN MEMBER ON USER_NO = BOARD_WRITER
+		 WHERE B.STATUS = 'Y'
+		   AND BOARD_CD = #{boardCode}
+		 <choose>
+		 	<when test="condition == 'writer'">
+		 		AND NICK_NAME
+		 	</when>
+		 	<when test="condition == 'title'">
+		 		AND BOARD_TITLE
+		 	</when>
+		 	<otherwise>
+		 		AND BOARD_CONTENT
+		 	</otherwise>
+		 </choose>
+		 LIKE CONCAT(CONCAT('%',#{keyword}),'%')
+		 ORDER BY B.CREATE_DATE DESC
+	</select>
 </mapper>

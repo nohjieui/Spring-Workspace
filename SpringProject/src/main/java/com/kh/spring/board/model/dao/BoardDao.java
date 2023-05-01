@@ -44,4 +44,14 @@ public class BoardDao {
 	public int updateReadCount(int boardNo) {
 		return sqlSession.update("boardMapper.updateReadCount",boardNo);
 	}
+	
+	public ArrayList<Board> selectSearchList(PageInfo pi, String boardCode){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.selectSearchList", boardCode, rowBounds); 
+	}
 }
