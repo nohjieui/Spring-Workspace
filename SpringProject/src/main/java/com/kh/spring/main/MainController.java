@@ -3,7 +3,7 @@ package com.kh.spring.main;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller // 컨트롤러임을 명시 + servlet-context.xml에서 bean(스프링에서 관리하는 객체)으로 등록시켜주는 역할을 함
+@Controller // 컨트롤러임을 명시 + servlet-context.xml에서 (스프링에서 관리하는 객체)으로 등록시켜주는 역할을 함
 public class MainController {
 
 	@RequestMapping("/main")

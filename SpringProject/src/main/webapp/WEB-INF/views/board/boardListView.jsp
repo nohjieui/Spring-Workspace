@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="pi" value="${map.pi }"/>
+<c:set var="list" value="${map.list }"/>
+<c:forEach items="${boardTypeList }" var="bt">
+	<c:if test="${bt.boardCd == boardCode }">
+		<c:set var="boardNM" value="${bt.boardName }"/>
+	</c:if>
+</c:forEach>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,7 +89,7 @@
 					<tr onclick="movePage(1);">
 						<td class="bno">555</td>
 						<td>
-							<img class="list-thumbnail" src="${contextPath }/resources/images/user.jsp">
+							<img class="list-thumbnail" src="${contextPath }/resources/images/user.jpg">
 							테스트
 						</td>
 						<td>테스트</td>
@@ -99,6 +106,9 @@
 			</script>
 			
 			<br>
+			<!-- 페이지네이션 a태그에 사용될 공통주소를 저장한 변수 -->
+			<c:set var="url" value="${boardCode}?cpage="/>
+			
 			<!-- 페이지 이동기능 구현 -->
 			<div id="pagingArea">
 			   <ul class="pagination">
@@ -128,7 +138,7 @@
 			
 			<br clear="both"><br>
 			
-			<form id="searchForm" action="" method="get" align="center">
+			<form id="searchForm" action="${boardCode}" method="get" align="center">
 				<div class="select">
 					<select class="custom-select" name="condition">
 						<option value="writer">작성자</option>

@@ -1,6 +1,7 @@
 package com.kh.spring.board.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.selectBoardTypeList();
 	}
 	
-	public ArrayList<Board> selectBoardList(int currentPage, String boardCode){
+	public void selectBoardList(int currentPage, String boardCode, Map<String, Object> map){
+		
+		// 2) 페이지네이션 객체 생성
+		// 3) 게시글 목록 조회
 		int listCount = boardDao.selectBoardListCount(boardCode);
 		
 		int pageLimit = 10;
@@ -32,7 +36,19 @@ public class BoardServiceImpl implements BoardService{
 		PageInfo pi = pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 		
 		ArrayList<Board> list = boardDao.selectBoardList(pi, boardCode);
+		map.put("pi", pi);
+		map.put("list", list);
 		
-		return list;
+		//return list;
+	}
+	
+	// 게시글 상세 조회 구현 서비스
+	public Board selectBoardDetail(int boardNo) {
+		return boardDao.selectBoardDetail(boardNo);
+	}
+	
+	// 조회수 증가 서비스
+	public int updateReadCount(int boardNo) {
+		return boardDao.updateReadCount(boardNo);
 	}
 }

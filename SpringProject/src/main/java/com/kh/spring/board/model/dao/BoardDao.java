@@ -35,5 +35,13 @@ public class BoardDao {
 		
 		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardList", boardCode, rowBounds); 
 	}
-	 
+	
+	public Board selectBoardDetail(int boardNo) {
+		return sqlSession.selectOne("boardMapper.selectBoardDetail", boardNo);
+		
+	}
+	
+	public int updateReadCount(int boardNo) {
+		return sqlSession.update("boardMapper.updateReadCount",boardNo);
+	}
 }
