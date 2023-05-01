@@ -36,7 +36,8 @@ public class MemberController {
 	// 객체간의 결합도가 올라감
 	
 	// Spring의 DI(Dependency Injection) => 객체를 스프링에서 생성해서 주입을 해주는 개념
-	// new 연산자를 쓰지않고 필드 선언만 한 수 @Autowired라는 어노테이션을 붙여서 내가 필요로하는
+	// @Autowired
+	// -> new 연산자를 쓰지않고 필드 선언만 한 수 @Autowired라는 어노테이션을 붙여서 내가 필요로하는
 	// 객체를 스프링 컨테이너로부터 주입받을 수 있음
 	
 	/*
@@ -47,11 +48,11 @@ public class MemberController {
 	 */
 
 	/*
-	 * 1) 필드방식 의존성(객체)
+	 * 1. 필드방식 의존성(객체)
 	 * 필드방식 의존성 주입 장점 :이해하기 편하다, 사용하기 편하다
 	 * 
-	 * 				  단점 : 1_순환 의존성 문제가 발생할 수 있다.
-	 * 				  		2_무분별한 주입시 의존관계 확인이 어렵다.
+	 * 				  단점 : 1)순환 의존성 문제가 발생할 수 있다.
+	 * 				  		2)무분별한 주입시 의존관계 확인이 어렵다.
 	 */
 	//@Autowired // bean으로 등록된 객체중 타입이 같거나, 상속관계인 bean을 자동으로 주입해주는 역할
 	private MemberService memberService;
@@ -59,10 +60,10 @@ public class MemberController {
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	/*
-	 * 2) 생성자방식 의존성 주입
+	 * 2. 생성자방식 의존성 주입
 	 * 생성자를 통한 의존성 주입 : 생성자에 매개변수로 참조할 클래스를 인자로 받아 필드에 매핑시킴
-	 * 장점 : 1_현재클래스에서 내가 주입시킬 객체들을 모아서 관리할 수 있기때문에 한눈에 알아보기 편함
-	 * 		 2_코드분석과 테스트에 유리하며, 객체주입시 가장 권장하는 방법
+	 * 장점 : 1)현재클래스에서 내가 주입시킬 객체들을 모아서 관리할 수 있기때문에 한눈에 알아보기 편함
+	 * 		 2)코드분석과 테스트에 유리하며, 객체주입시 가장 권장하는 방법
 	 */
 	
 	/* @Autowired */  // -> 생성자가 하나라면 생략가능. 여러개라면 Autowired 어노테이션을 추가해야함
@@ -77,7 +78,7 @@ public class MemberController {
 	}
 	
 	/*
-	 * 3) setter방식 의존성 주입
+	 * 3. setter방식 의존성 주입
 	 * setter 주입방식 : setter메서드로 bean을 주입받는 방식
 	 * 
 	 * 생성자에 너무 많은 의존성을 주입하게 되면 알아보기 힘들다라는 단점이 있어서 보완하기 위해 사용
@@ -215,12 +216,12 @@ public class MemberController {
 	@PostMapping("/login")
 	// public ModelAndView loginMember(ModelAndView mv,~~) -> 
 	public String loginMember(Model model,
-									Member m,
-									HttpSession session,
-									RedirectAttributes ra,
-									HttpServletResponse resp,
-									HttpServletRequest req,
-									@RequestParam(value="saveId", required=false) String saveId) {
+							  Member m,
+							  HttpSession session,
+							  RedirectAttributes ra,
+							  HttpServletResponse resp,
+							  HttpServletRequest req,
+							  @RequestParam(value="saveId", required=false) String saveId) {
 		
 		/* 암호화 전 로그인 요청처리 -> memberMapper-loginMember-USER_PWD열 주석처리함 */
 		
@@ -343,7 +344,7 @@ public class MemberController {
 		// SessionStatus라는 별도의 객체를 이용해야만 없앨 수 있다.
 		
 		//session.invalidate(); // 기존 세션 방식으로는 안됨(SessionStatus 매개변수로 추가 전)
-		status.setComplete(); // 세션이 할일이 완려됨 -> 없앰(SessionStatus 매개변수로 추가 후)
+		status.setComplete(); // 세션이 할일이 완료됨 -> 없앰(SessionStatus 매개변수로 추가 후)
 		
 		/*
 		 * 로그인 같은 경우는 SessionAttributes로 데이터를 저장하고 setComplete()로 지워주고,

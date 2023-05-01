@@ -7,10 +7,49 @@
 		<result column="BOARD_NAME" property="boardName"/>
 	</resultMap>
 	
+	<resultMap type="board" id="boardResultSet">
+		<result column="BOARD_NO" property="boardNo"/>
+		<result column="BOARD_TITLE" property="boardTitle"/>
+		<result column="BOARD_CONTENT" property="boardContent"/>
+		<result column="BOARD_WRITER" property="boardWriter"/>
+		<result column="NICK_NAME" property="nickName"/>
+		<result column="COUNT" property="count"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="BOARD_CD" property="boardCd"/>
+		<result column="THUMBNAIL" property="thumbnail"/>
+	</resultMap>
+	
 	<select id="selectBoardTypeList" resultMap="boardTypeResultSet">
 		SELECT *
 		  FROM BOARD_TYPE
 		ORDER BY BOARD_CD
 	</select>
-
+	
+	<select id="selectBoardListCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM BOARD
+		 WHERE BOARD_CD = #{boardCode}
+		   AND STATUS = 'Y'
+	</select>
+	
+	<select id="selectBoardList" resultMap="boardResultSet">
+		SELECT BOARD_NO,
+			   BOARD_TITLE,
+			   BOARD_WRITER,
+			   
+			   NICK_NAME,
+			   COUNT,
+			   B.CREATE_DATE
+			   (
+					SELECT CHANGE_NAME
+					  FROM BOARD_IMG
+					 WHERE BOARD_NO = REF_BNO
+					   AND IMG_LEVEL = 0
+			   ) THUMBNAIL
+		  FORM BOARD B
+		  JOIN MEMBER ON USER_NO = BOARD_WRITER
+		 WHERE B.STATUS = 'Y'
+		   AND BOARD_CD = #{boardCode}
+		 ORDER BY B.CREATE_DATE DESC
+	</select>
 </mapper>

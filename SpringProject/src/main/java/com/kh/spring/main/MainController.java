@@ -11,7 +11,7 @@ public class MainController {
 		// index.jsp의 forward를 처리하는 함수가 mainForward
 		// index.jsp에서 다시한번 main페이지로 포워딩시켜줌
 		return "main";  // 단순 문자열 작성시 무조건 forward가 실행됨		(WEB-INF/views + main + .jsp) -> main 앞뒤로 자동으로 붙음
-						// servlet-context.xml <<beans:bean > 태그 참고 
+						// servlet-context.xml <beans:bean > 태그 참고 
 		
 	}
 }
