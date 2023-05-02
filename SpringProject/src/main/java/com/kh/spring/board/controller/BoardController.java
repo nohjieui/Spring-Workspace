@@ -36,11 +36,12 @@ public class BoardController {
 	 * 게시글 목록 조회 서비스
 	 * 
 	 * @PathVariable : URL경로에 포함되어있는 값을 변수로 사용할 수 있게하는 역할
-	 * => ★자동으로 request scope에 등록된다 ==> jsp에서 `{value} el로 작성가능하다.
+	 * => ★자동으로 request scope에 등록된다 ==> jsp에서 {value} el로 작성가능하다.
 	 * 
 	 * PathVariable : 요청 자원을 식별하는 경우에 사용
 	 * 
 	 * QueryString : 정렬, 검색 등 필터링옵션이 있을 경우 사용
+	 * 				 ex) N?condition=title&keyword=안
 	 */
 	@GetMapping("/list/{boardCode}")
 	public String boardList(@PathVariable("boardCode") String boardCode,

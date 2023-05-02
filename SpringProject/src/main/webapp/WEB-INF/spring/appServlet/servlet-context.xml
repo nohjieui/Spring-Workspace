@@ -44,7 +44,8 @@
 	 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
+			<mvc:mapping path="/**"/> <!-- /** : 모든 요청을 의미 -->
+				<!-- 위의 url(path="/**")로 요청이 들어왔을때 감지를 할 bean객체를 넣어줌 -->
 				<beans:bean class="com.kh.spring.common.interceptor.BoardTypeInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>

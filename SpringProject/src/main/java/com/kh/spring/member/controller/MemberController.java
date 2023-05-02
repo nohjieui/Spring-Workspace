@@ -380,9 +380,9 @@ public class MemberController {
 		
 		Member searchMember = memberService.loginMember(m);
 		
-		// JSON : 자바스트립트 객체 표기법으로 작성된 "문자열"형태의 객체
+		// JSON : 자바스크립트 객체 표기법으로 작성된 "문자열"형태의객체.
 		
-		// GSON 라이브러리 : JSON을 보다 쉽게 다루기위한 google에서 배포한 라이브러리
+		// GSON 라이브러리 : JSON을 보다 쉽게 다루기 위한 google에서 배포한 라이브러리
 		
 		return new Gson().toJson(searchMember);
 	}

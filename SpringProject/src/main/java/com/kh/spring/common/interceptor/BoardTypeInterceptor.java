@@ -23,6 +23,8 @@ public class BoardTypeInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 		
 		// application scope에 boardTypeList가 있는지 체크, 없을 경우 이를 조회하는 boardService메서드 호출 후 결과를 셋팅
+		
+		// application scope 객체 얻어오기
 		ServletContext application = request.getServletContext();
 		
 		if(application.getAttribute("boardTypeList") == null) {
@@ -36,11 +38,11 @@ public class BoardTypeInterceptor extends HandlerInterceptorAdapter{
 	
 	@Override // 후처리할 메서드 작성
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
-		System.out.println("후 처리 실행");
+		//System.out.println("후 처리 실행");
 	}
 	
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex){
-		System.out.println("view 처리 완료 후 수행");
+		//System.out.println("view 처리 완료 후 수행");
 	}
 }

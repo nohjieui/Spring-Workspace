@@ -5,16 +5,19 @@
 /* 회원정보 조회(비동기 통신) */
 document.getElementById("select1").addEventListener("click",function(){
 	const input = document.getElementById("in1");
-	const div = document.getElementById("result1");
+ 	const div = document.getElementById("result1");
 	
 	// Ajax작성
 	$.ajax({
 		url : "member/selectOne",
 		data : {input : input.value},
 		type : "POST",
-		dateType : "JSON",
+		dataType : "JSON",
 		success : function(result){
 			console.log(result);
+			console.log(result.userId);
+			div.innerHTML += "이름 : " + result.nickName + "<br>"
+							+"주소 : " + result.address + "<br>";
 		},
 		error : function(request){
 			console.log("에러발상");
