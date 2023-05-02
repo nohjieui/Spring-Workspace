@@ -32,7 +32,7 @@
 			<h2>게시글 상세보기</h2>
 			<br>
 			
-			<button id="listBtn" class="btn btn-secondary" style="float: right;" >목록으로</button>
+			<button id="listBtn" class="btn btn-secondary" style="float: right;"  onclick="location.href='${contextPath}/board/list/${boardCode}'">목록으로</button>
 			<br><br>
 			
 			<table id="contentArea" align="center" class="table">
