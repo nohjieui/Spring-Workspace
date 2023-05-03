@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -256,7 +257,10 @@ public class MemberController {
 			// response.sendRedirect(request.getContextPath());
 		}
 		*/
-		 
+		if(true) {
+			throw new RuntimeException();
+			
+		}
 		
 		// 암호화 후
 		/*
@@ -393,6 +397,27 @@ public class MemberController {
 		ArrayList<Member> list = memberService.selectAll();
 		
 		return new Gson().toJson(list);
+	}
+	
+	
+	/*
+	 * 스프링 예외처리 방법(3가지, 중복사용가능)
+	 * 
+	 * 1 : 메서드별로 예외처리(try/catch , throws)
+	 * 
+	 * 2 : 하나의 컨트롤러에서 발생하는 예외를 싹 모아서 처리 -> @ExceptionHandler
+	 * 
+	 * 3 : 웹어플리케이션 전역에서 발생하는 예외를 다 모아서 처리 -> @ControllerAdvice
+	 */
+	
+	@ExceptionHandler(Exception.class)
+	public String exeptionHandler(Exception e, Model model) {
+		e.printStackTrace();
+		
+		model.addAttribute("errorMsg", "서비스 이용 중 문제가 발생했습니다.");
+		model.addAttribute("e", e);
+		
+		return "common/error";
 	}
 }
 
