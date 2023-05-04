@@ -1,5 +1,6 @@
 package com.kh.spring.chat.model.websocket;
 
+import java.sql.Date;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +11,10 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.kh.spring.chat.model.service.ChatService;
+import com.kh.spring.chat.model.vo.ChatMessage;
 
 public class ChatWebsocketHandler extends TextWebSocketHandler{ //TextWebSocketHandler : 문자열 형태의 데이터만 주고받을 수 있는 통신 객체?
 	
@@ -46,7 +50,7 @@ public class ChatWebsocketHandler extends TextWebSocketHandler{ //TextWebSocketH
 	public void afterConnectionEstablished(WebSocketSession session) {
 		
 		// WebSocketSession : 웹소켓에 접속/요청한 클라이언트의 세션 정보
-		System.out.println(session.getId()+"가 연결함~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println(session.getId()+"가 연결함=====================================");
 		
 		sessions.add(session); // 전달받은 session을 set에 추가
 	}
@@ -64,5 +68,46 @@ public class ChatWebsocketHandler extends TextWebSocketHandler{ //TextWebSocketH
 		
 		// Payload : 전송되는 데이터(json객체)
 		System.out.println("전달된 메세지 : "+message.getPayload());
+		
+		// JackSon라이브러리 : java에서 json을 다루기위한 라이브러리
+		
+		// JackSon-databind -> ObjectMapper를 이용해서 JSON형태로 넘어온 데이터를 특정 VO필드에 맞게 자동 매핑됨
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		ChatMessage chatMessage = objectMapper.readValue(message.getPayload(), ChatMessage.class);
+		
+		chatMessage.setCreateDate(new Date(System.currentTimeMillis()));
+		
+		// 전달받은 채팅메세지를 db에 삽입
+		System.out.println(chatMessage);
+		
+		int result = chatService.insertMessage(chatMessage);
+		
+		if(result > 0) {
+			// 같은 방에 접속중인 클라이언트에게 전달받은 메세지 뿌리기
+			for(WebSocketSession s :sessions) {
+				
+				// 현재 반복을 진행중인 WebSocketSession안에 담겨있는 방번호 == 메세지 안에 담겨있는 방번호가 일치하는 경우 메세지 뿌리기
+				int chatRoomNo = (int)s.getAttributes().get("chatRoomNo");
+				
+				// 메세지에 담겨있는 채팅방 번호와 chatRoomNo가 일치하는지 비교
+				if(chatMessage.getChatRoomNo() == chatRoomNo) {
+					// 같은방 클라이언트에게 JSON형태로 메세지를 보냄
+					// s.sendMessage(new TextMessage( JSON객체 ));
+					s.sendMessage(new TextMessage(new Gson().toJson(chatMessage)));
+				}
+				
+			}
+		}
 	}
 }
+
+
+
+
+
+
+
+
+
+

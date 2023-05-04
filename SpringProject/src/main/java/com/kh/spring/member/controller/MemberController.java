@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -257,10 +258,11 @@ public class MemberController {
 			// response.sendRedirect(request.getContextPath());
 		}
 		*/
-		if(true) {
-			throw new RuntimeException();
-			
-		}
+		/*
+		 * if(true) { throw new RuntimeException();
+		 * 
+		 * }
+		 */
 		
 		// 암호화 후
 		/*
@@ -292,6 +294,9 @@ public class MemberController {
 			}else { // 아이디저장 체크하지 않을때
 				cookie.setMaxAge(0);
 			}
+			
+			// 쿠키에 아이디값 저장
+			cookie.setPath(req.getContextPath());
 			
 			// 쿠키를 응답시 클라이언트에 전달
 			resp.addCookie(cookie);
@@ -417,7 +422,20 @@ public class MemberController {
 		model.addAttribute("errorMsg", "서비스 이용 중 문제가 발생했습니다.");
 		model.addAttribute("e", e);
 		
-		return "common/error";
+		return "common/errorPage";
+	}
+
+	public int count = 0;
+	
+	// 고정방식(spring-scheduler)
+	@Scheduled(fixedDelay = 1000)
+	public void test() {
+		System.out.println("1초마다 출력하기" + count++);
+	}
+	
+	// crontab방식
+	public void testCron() {
+		System.out.println("크론 테스트");
 	}
 }
 

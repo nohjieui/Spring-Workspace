@@ -92,7 +92,7 @@
 				interceptors : http통신에서 request와 response를 가로채는 역할
 				
 				handshake-interceptors : 
-					요청 관련 데이터 중 httpSession정보를 가로채서 webSocketSEssion에게 넣어줌
+					요청 관련 데이터 중 httpSession정보를 가로채서 webSocketSession에게 넣어줌
 			 -->
 			 <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
 		</websocket:handshake-interceptors>

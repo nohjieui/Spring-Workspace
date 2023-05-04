@@ -4,7 +4,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice
+@ControllerAdvice // 모든오류를 캐치해주는 컨트롤러(어플리케이션 전역에서 발생하는 예외를 모아서 처리해줌)
 public class ExceptionController {
 
 	@ExceptionHandler(Exception.class)
