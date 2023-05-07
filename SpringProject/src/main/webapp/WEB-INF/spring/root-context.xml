@@ -71,6 +71,7 @@
 		<!-- 연결을 위한 도구 -->
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
+	<!-- beans 태그 안에서 ref 속성은 현재 폴더 안에서 생성한 또다른  bean객체를 의미함 -->
 	<!-- 
 		내부적으로 객체를 필요할때 실행되는 코드
 		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();

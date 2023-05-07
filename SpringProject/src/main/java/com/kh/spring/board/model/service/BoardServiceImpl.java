@@ -33,14 +33,14 @@ public class BoardServiceImpl implements BoardService{
 	
 	public void selectBoardList(int currentPage, String boardCode, Map<String, Object> map){
 		
-		// 2) 페이지네이션 객체 생성
-		// 3) 게시글 목록 조회
 		int listCount = boardDao.selectBoardListCount(boardCode);
 		
+		// 2) 페이지네이션 객체 생성
 		int pageLimit = 10;
 		int boardLimit = 5;
 		PageInfo pi = pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 		
+		// 3) 게시글 목록 조회
 		ArrayList<Board> list = boardDao.selectBoardList(pi, boardCode);
 		map.put("pi", pi);
 		map.put("list", list);
@@ -93,7 +93,7 @@ public class BoardServiceImpl implements BoardService{
 	public int insertBoard(Board b, List<MultipartFile> list, String webPath, String serverFolderPath) throws Exception {
 		
 		// 1) 게시글 등록
-		// 게시글 등록 후 해당 게시글의 pk값을 반환받을 예정 == boardNo
+		// 게시글 등록 후 해당 게시글의 pk값을 반환받을 예정 ==> boardNo
 		int boardNo = boardDao.insertBoard(b);
 		
 		if(boardNo > 0 && list != null) {
@@ -101,6 +101,7 @@ public class BoardServiceImpl implements BoardService{
 			// list -> 실제파일이 담겨있는 리스트
 			List<BoardImg> boardImageList = new ArrayList();
 			// boardImgList : db에 등록한 데이터들을 모아놓은 컬렉션
+			
 			List<String> renameList = new ArrayList();
 			// renameList : 변경된 파일명을 저장할 리스트
 			
@@ -132,7 +133,7 @@ public class BoardServiceImpl implements BoardService{
 				if(result == boardImageList.size()) {
 					// 삽입된 행의 개수와 업로드 된 이미지 수가 같은경우
 					
-					// 서버에 저장(Utils.savePath에서 선작업함)
+					// 서버에 이미지 저장(Utils.savePath에서 선작업함)
 					
 				}else { // 이미지 삽입 실패시, 강제로 예외 발생시켜서 rollback시키기
 					throw new Exception("이미지 등록시 예외발생함");

@@ -21,6 +21,7 @@ public interface BoardService {
 	
 	public int updateReadCount(int boardNo);
 	
+	// throws -> 예외처리를 본인을 호출한 함수로 떠넘기는 키워드!
 	public int insertBoard(Board b, List<MultipartFile> list, String webPath, String serverFolderPath) throws Exception;
 	
 	public int updateBoard(Board b, List<MultipartFile> list, String webPath, String serverFolderPath, String deleteList) throws Exception;

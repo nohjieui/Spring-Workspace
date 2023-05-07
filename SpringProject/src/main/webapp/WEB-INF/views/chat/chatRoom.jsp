@@ -93,9 +93,8 @@
          <button id="send">보내기</button>
       </div>
    </div>
-   <!-- sockjs를 이용한 WebSocket 라이브러리 추가 -->
-   
-   <!-- sockjs-client -->
+   <!-- sockjs를 이용한 WebSocket 라이브러리 추가(백단에서 쓴 웹소켓을 프론트단에서도 js라이브러리를 등록해서 사용함) -->
+   <!-- sockjs-client용(백단에서 사용한건 서버용, 이건 클라이언트용임) -->
    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
    
 	<script>
@@ -107,7 +106,7 @@
 		const contextPath = "${contextPath}";
 		
 		//  /chat이라는 요청주소로 통신할 수 있는 WebSocket객체 생성
-		let chattingSock = new SockJS(contextPath+"/chat");
+		let chattingSock = new SockJS(contextPath+"/chat"); // servlet-context.xml -> chatHandler로 등록해둠
 		// websocket프로토콜을 이용해서 해당 주소로 데이터를 송/수신 할 수 있음
 		
 		let exitBtn = document.querySelector("#exit-btn");

@@ -194,7 +194,7 @@ public class MemberController {
 		// request, session을 대체하는 객체
 		
 		// model클래스 안의 addAttribute()메서드를 이용하는 방법
-		model.addAttribute("errorMas", "오류발생"); // == request.setAttribute("errorMsg", "오류발생");
+		model.addAttribute("errorMsg", "오류발생"); // == request.setAttribute("errorMsg", "오류발생");
 		
 		// Model의 기본 scope는 request scope임.
 		// 단, session scope로 변환하고 싶은 경우
@@ -258,11 +258,7 @@ public class MemberController {
 			// response.sendRedirect(request.getContextPath());
 		}
 		*/
-		/*
-		 * if(true) { throw new RuntimeException();
-		 * 
-		 * }
-		 */
+
 		
 		// 암호화 후
 		/*
@@ -270,6 +266,11 @@ public class MemberController {
 		 * 암호화 작업을 하면 입력받은 비밀번호는 평문이지만 db에 등록된 비밀번호는 암호문이기때문에 비교시 무조건 다르게 나옴
 		 * 아이디로 먼저 회원정보 조회 후 회원이 있으면 비밀번호 암호문 비교 메소드를 이용해서 일치하는지 확인
 		 */
+		
+//		if(true) { 
+//			throw new RuntimeException(); // 예외 강제 발생
+//		}
+		 
 		Member loginUser = memberService.loginMember(m);
 		// loginUser : 아이디 + 비밀번호로 조회한 회원정보 -----> 아이디로만 조회
 		// loginUser안의 userPwd : 암호화된 비밀번호
@@ -348,7 +349,7 @@ public class MemberController {
 		
 		/*
 		 * 2. 멤버테이블에 회원가입 등록 성공했다면 alertMsg(session)
-		 * 					  실패했다면 errorMst(request)
+		 * 					  실패했다면 errorMsg(request)
 		 */
 		String url = "";
 		if(result > 0) { // 성공시 - 메인페이지로
@@ -408,11 +409,11 @@ public class MemberController {
 	/*
 	 * 스프링 예외처리 방법(3가지, 중복사용가능)
 	 * 
-	 * 1 : 메서드별로 예외처리(try/catch , throws)
+	 * 1순위 : 메서드별로 예외처리(try/catch , throws)
 	 * 
-	 * 2 : 하나의 컨트롤러에서 발생하는 예외를 싹 모아서 처리 -> @ExceptionHandler
+	 * 2순위 : 하나의 컨트롤러에서 발생하는 예외를 싹 모아서 처리 -> @ExceptionHandler
 	 * 
-	 * 3 : 웹어플리케이션 전역에서 발생하는 예외를 다 모아서 처리 -> @ControllerAdvice
+	 * 3순위 : 웹어플리케이션 전역에서 발생하는 예외를 다 모아서 처리 -> @ControllerAdvice
 	 */
 	
 	@ExceptionHandler(Exception.class)
@@ -430,7 +431,7 @@ public class MemberController {
 	// 고정방식(spring-scheduler)
 	@Scheduled(fixedDelay = 1000)
 	public void test() {
-		System.out.println("1초마다 출력하기" + count++);
+		//System.out.println("1초마다 출력하기" + count++);
 	}
 	
 	// crontab방식

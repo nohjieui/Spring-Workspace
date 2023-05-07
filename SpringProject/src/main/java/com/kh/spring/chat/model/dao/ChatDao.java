@@ -24,9 +24,9 @@ public class ChatDao {
 		
 		int result =  sqlSession.insert("chattingMapper.openChatRoom", chatRoom);
 		// pk값 반환으로 삽입이 안되어있다면 0반환
-		
+
 		if(result > 0) {
-			return chatRoom.getChatRoomNo(); // 자동증가되면 chatRoom 안에 ??????????????
+			return chatRoom.getChatRoomNo(); // 자동증가된 시퀀스값이 매개변수인 chatRoom 안에 그대로 들어가있음
 		}else {
 			return result;
 		}

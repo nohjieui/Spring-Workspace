@@ -74,10 +74,17 @@ public class BoardDao {
 		if(result > 0) {
 			result = b.getBoardNo();
 			// 게시글 삽입 성공시 selectKey태그를 이용해서 세팅한 boardNo값을 b객체안에 담아서 반환시켜줌
+			/*
+			 * 처음 sqlSession.insert("boardMapper.insertBoard", b)에서의 b객체의 boardNo값은
+			 * 세팅되어있지 않았기 때문에 0값이 들어가있었음
+			 * 
+			 * 게시글 삽입에 성공한다면 시퀀스로부터 얻어온 다음NEXTVAL의 값이 boardNo에 담겨있는 상태
+			 */
 		}
 		return result;
 	}
 	
+	// 2) 이미지 삽입 코드 추가
 	public int insertBoardImgList(List<BoardImg> boardImageList) {
 		return sqlSession.insert("boardMapper.insertBoardImgList", boardImageList);
 	}

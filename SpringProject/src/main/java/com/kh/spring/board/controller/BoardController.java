@@ -55,12 +55,13 @@ public class BoardController {
 							@RequestParam Map<String, Object> paramMap) {
 		// 검색요청이 있었다면, paramMap안에는 keyword, condition이 들어가 있을 것.
 		System.out.println(paramMap);
+		
 		Map<String, Object> map = new HashMap();
-		// 게시글 목록 조회 서비스 호출시 작업 내용
-		// 1) 게시판 이름 조회(2,3은 Dao에 있음)
 		
 		// 검색 요청을 하지 않은 경우
 		if(paramMap.get("condition") == null) {
+			// 게시글 목록 조회 서비스 호출시 작업 내용
+			// 1) 게시판 이름 조회(2,3은 Dao에 있음)
 			boardService.selectBoardList(currentPage, boardCode, map);
 		}else {
 			// 검색 요청을 한 경우
@@ -179,16 +180,19 @@ public class BoardController {
 							  
 							  @RequestParam(value = "deleteList", required = false) String deleteList ) {
 		// 사진게시판들 이미지를 저장할 저장경로 얻어오기
-		String webPath = "resources/images/boardT/"; // 하드코딩
+		String webPath = "/resources/images/boardT/"; // 하드코딩
 		String serverFolderPath = session.getServletContext().getRealPath(webPath); // 동적으로 만들어둠
 		b.setBoardCd(boardCode);
 		
 		logger.info("insert함수 실행");
 		
 		int result = 0;
-		
+
 		if(mode.equals("insert")) {
 			// db에 Board테이블에 데이터 추가
+			/*
+			 * try/catch 추가한 이유 : boardService.insertBoard에서 예외처리해주는 작업이 있는데 throw키워드로 보낸 함수 호출해서
+			 */
 			try {
 				result = boardService.insertBoard(b, imgList, webPath, serverFolderPath);
 			} catch(Exception e){
@@ -209,10 +213,11 @@ public class BoardController {
 		
 		// 첨부파일 업로드 -> Board 테이블 안에 ORIGIN_NAME, CHANGE_NAME
 		
-		
 		if(result > 0) { // 성공적으로 추가시
 			session.setAttribute("alertMsg", "게시글 작성에 성공하였습니다.");
 			return "redirect:../list/"+boardCode;
+			// redirect: => /insert/{boardCode} 
+			// insert자리에 list가 들어가게 됨 => /spring/board/list/+boardCode
 		} else { // errorPage포워딩
 			model.addAttribute("errorMsg", "게시글 작성 실패");
 			return "common/errorPage";

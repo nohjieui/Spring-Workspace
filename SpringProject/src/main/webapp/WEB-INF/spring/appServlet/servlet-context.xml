@@ -38,7 +38,7 @@
 	
 	<!-- 
 		base-package에 등록된 패키지와 그 하위 패키지 모두 감시(scan)해서 빈으로 등록 가능한 클래스들은 spring-bean으로 등록해둠
-		(com.kh.spring패키지 아래에 있는 모든 클래스들을 훑어보면서 어노테이션이(@Controller, @Service) 있으면 bean객체로 등록해둠)
+		(com.kh.spring패키지 아래에 있는 모든 클래스들을 훑어보면서 어노테이션이(@Controller, @Service...) 있으면 bean객체로 등록해둠)
 	 -->
 	<context:component-scan base-package="com.kh.spring" />
 	
@@ -81,10 +81,15 @@
 	
 	
 	<!-- webSocket요청시 핸들러 클래스와 연결하기 -->
+	<!-- 추가주석 : 아래에서 선언한 핸들러의 bean설정 -> Controller의 경로를 정확히 설정해준다. -->
 	<beans:bean id="chatHandler" class="com.kh.spring.chat.model.websocket.ChatWebsocketHandler"/>
 	
 	<websocket:handlers>
 		<!-- 웹소켓 요청시 요청 주소를 처리할 bean객체 지정 -->
+		<!--추가주석 :
+			웹소켓 클라이언트가 '/chat' 으로 접속하면
+			chatHandler라는 bean으로 처리하겠다는 것(위의 bean 선언과 연결하여)
+		 -->
 		<websocket:mapping handler="chatHandler" path="/chat"/> <!-- spring아래에 /chat으로 들어오는 경로를 모두 읽어들임 -->
 		
 		<websocket:handshake-interceptors>
@@ -98,18 +103,17 @@
 		</websocket:handshake-interceptors>
 		
 		<!-- SocketJS라이브러리를 이용해서 만들어진 웹소켓 객체임을 의미한다 -->
-		<websocket:sockjs></websocket:sockjs>
+		<websocket:sockjs/>
 	</websocket:handlers>
 	
 	<!-- 
 		HandlerMapping을 통해서 어떤 url로 요청했을 때 어떤 controller가 구동될것인지를 알아내야한다.
 		
+		xml 형태로 spring bean객체를 만든다면?
 		1. 요청때마다 실행될 controller들을 bean으로 등록시켜두기
 		 <beans:bean class="com.kh.spring.board.controller.BoardController" id="BoardController"/>
-		 <beans:bean class="com.kh.spring.board.controller.BoardController" id="BoardController"/>
-		 <beans:bean class="com.kh.spring.board.controller.BoardController" id="BoardController"/>
-		 <beans:bean class="com.kh.spring.board.controller.BoardController" id="BoardController"/>
-		 <beans:bean class="com.kh.spring.board.controller.BoardController" id="BoardController"/>
+		 <beans:bean class="com.kh.spring.board.controller.ReplyController" id="ReplyController"/>
+		 <beans:bean class="com.kh.spring.member.controller.MemberController" id="MemberController"/>
 		 ...(등록할 컨트롤러 갯수만큼 bean객체를 등록시켜줘야함)
 		 
 		2. 어떤 url로 요청이 들어올것을 처리할것인지 매핑시켜줘야한다.
@@ -120,20 +124,20 @@
 		 	</beans:property>
 		 </beans:bean>
 		 
-		위와같은 방식으로 xml으로 bean을 등록한다면, bean 개수가 너무 많아지면 관리가 어려워진다.
+		위와 같은 방식으로 xml로 bean을 등록한다면, bean 개수가 너무 많아지면 관리가 어려워진다.
 		또한 여러 개발자가 같은 xml파일을 수정하면 충돌이 쉽게 발생할 수 있다.
 		
 		장점 : xml문서에 한눈으로 볼 수 있기때문에 관리의 편의성이 높음
 		
 		* 어노테이션 방식
-		- component-scan에서 지정한 패키지명(com.kh.spring)의 하위 모든 클래스를 스캔하여
+		- <context:component-scan>에서 지정한 패키지명(com.kh.spring)의 하위 모든 클래스를 스캔하여
 		@Controller와 같은 MVC어노테이션이 붙은 클래스를 자동으로 bean으로 등록해주는 방식
 		@Service
 		@Repository
 		...
 		
 		단, 내가 직접만든 클래스가 아닐경우(spring에서 제공하는 클래스이거나 컴파일 된 class인 경우) -> 84열 참고
-		소스코드 내부를 수정할 수 없이 때문에 코드에 어노테이션을 붙일수가 없다.
+		소스코드 내부를 수정할 수 없기 때문에 코드에 어노테이션을 붙일수가 없다.
 		따라서 이 경우에는 xml방식으로 bean을 등록해줘야한다.
 	 -->
 	 

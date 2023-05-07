@@ -3,11 +3,20 @@
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>
-    /WEB-INF/spring/root-context.xml
-    /WEB-INF/spring/spring-security.xml
-    /WEB-INF/spring/spring-scheduler.xml
+	    /WEB-INF/spring/root-context.xml
+	    /WEB-INF/spring/spring-security.xml
+	    /WEB-INF/spring/spring-scheduler.xml
     </param-value>
   </context-param>
+  
+  <!-- 
+  	ContextLoaderListener : application scope를 가진 context객체가 생성되는 시점을 감지하는 클래스
+  	위의 <context-param>에 등록한 key, value 값들의 xml 정보를 읽어들이는 역할을 함
+  	프로그램 구동시 읽어들일 파일이 많다면 </param-value>에 여러개 등록할 수 있음
+  	
+  	간단히 말하자면 ContextLoaderListener는 프로그램시작과 동시에 <context-param>안에있는  xml파일을 읽어들인다!
+   -->
+  <!-- listener : 자바용 이벤트리스너라고 생각하면 됨 -->
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
