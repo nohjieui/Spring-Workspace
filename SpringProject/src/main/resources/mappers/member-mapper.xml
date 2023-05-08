@@ -50,4 +50,10 @@
 		FROM MEMBER
 		WHERE STATUS='Y'
 	</select>
+	
+	<update id="updateMemberChangePwd">
+		UPDATE MEMBER
+		   SET CHANGE_PWD = 'Y'
+		 <![CDATA[WHERE ADD_MONTHS(MODIFY_DATE, 3) < SYSDATE]]> <!-- <의 특수기호를 부등호가 아니라 문자열로 처리하라  <![CDATA[...]]>  추가 -->
+	</update>
 </mapper>

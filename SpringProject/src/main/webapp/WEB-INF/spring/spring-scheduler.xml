@@ -23,10 +23,12 @@
 		5. 스케줄링을 원하는 메소드에 가서 scheduler 어노테이션 추가하기
 		6. 원하는 실행방식을 결정하여 스케줄링하기(고정방식, crontab방식이 있음)
 	 -->
-	 
-	<!-- MemberController에서 등록한 bean객체는 servlet-context.xml에 등록되어있음 -->
+
+	<!-- MemberController에서 등록한 bean객체는 servlet-context.xml에 등록되어있음.
+		 .xml파일들은 서로연관이 없기 때문에 해당 xml파일에서 따로 bean객체를 등록해줘야함 -->
 	<!-- 3.스케줄러로 사용할 클래스를 bean객체로 등록  -->
 	<context:component-scan base-package="com.kh.spring"></context:component-scan>
+	
 	<!-- 2.annotation 활성화 -->
 	<task:annotation-driven scheduler="khScheduler"/>
 	<task:scheduler id="khScheduler" pool-size="10"/>
@@ -45,7 +47,7 @@
 			*	*	*	* 	* 	 * 	  *
 			초	분	시	일	월	요일	년도(생략가능)
 			* : 모든값(매시, 매일, 매주, 매월 ...)
-			? : 어던값이든 상관없다
+			? : 어떤값이든 상관없다
 			- : 범위를 지정 1-15
 			, : 여러값을 지정할 때 12, 18, 30
 			/ : 증분값, 0/2 -> 0은 초기값 2는 증가값
@@ -57,7 +59,7 @@
 			0 0 1 * * * *
 			
 			매일 30분마다 실행되게 하고싶다.
-			0 20 * * * * *
+			0 30 * * * * *
 			
 			매시간 5초마다 실행되게 하고싶다.
 			5 * * * * * *

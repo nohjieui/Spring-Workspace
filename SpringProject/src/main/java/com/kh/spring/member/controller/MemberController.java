@@ -7,8 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +34,7 @@ import com.kh.spring.member.model.vo.Member;
 
 // 로그인, 회원가입기능 완료 후 실행될 코드
 @SessionAttributes({"loginUser"})
-public class MemberController {
+public class MemberController extends QuartzJobBean {
 
 	//private MemberService ms = new MemberServiceImpl();
 	// 기존 객체 생성 방식. 서비스가 동시에 많은 횟수의 요청이 들어오면 그만큼의 객체가 생성됨
@@ -436,7 +439,25 @@ public class MemberController {
 	
 	// crontab방식
 	public void testCron() {
-		System.out.println("크론 테스트");
+		//System.out.println("크론 테스트");
+	}
+	
+	
+	public void testQuartz() {
+		System.out.println("콰츠 테스트");
+		/* memberService.updateMemberChangePwd(); */
+	}
+	
+	/*
+	 * 회원정보 확인 스케줄러
+	 * 매일 오전 1시에 모든 사용자의 정보를 검색하여 사용자가 비밀번호를 안바꾼지 3개월이 지났다면,
+	 * Member테이블의 changePwd의 값을 Y로 변경
+	 * 
+	 * 로그인 할 때 changePwd의 값이 Y라면 비밀번호 변경 페이지로 이동(이건안함)
+	 */
+	@Override
+	public void executeInternal(JobExecutionContext context) throws JobExecutionException{
+		memberService.updateMemberChangePwd();
 	}
 }
 

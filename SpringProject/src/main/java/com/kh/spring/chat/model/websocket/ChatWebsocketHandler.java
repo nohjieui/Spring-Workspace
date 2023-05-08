@@ -72,8 +72,7 @@ public class ChatWebsocketHandler extends TextWebSocketHandler{ //TextWebSocketH
 		// Payload : 전송되는 데이터(json객체), Payload 필드 안에있는 데이터를 가져오는 getter 함수
 		System.out.println("전달된 메세지 : "+message.getPayload());
 		
-		// JackSon라이브러리 : java에서 json을 다루기위한 라이브러리
-		
+		// JackSon라이브러리 : java에서 json을 다루기위한 라이브러리(pom.xml에 추가해둠)
 		// JackSon-databind -> ObjectMapper를 이용해서 JSON형태로 넘어온 데이터를 특정 VO필드에 맞게 자동 매핑됨
 		ObjectMapper objectMapper = new ObjectMapper();
 		

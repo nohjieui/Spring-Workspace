@@ -40,4 +40,26 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<Member> selectAll(){
 		return memberDao.selectAll();
 	}
+	
+	@Override
+	public void updateMemberChangePwd() {
+		memberDao.updateMemberChangePwd();
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

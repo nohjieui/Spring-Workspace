@@ -210,6 +210,14 @@ public class BoardServiceImpl implements BoardService{
 		return result;
 	}
 	
+	
+	// FileDeleteScheduler 클래스 - 파일 삭제
+	// 1. BOARD_IMG 테이블 안에 있는 목록들을 모두 조회
+	public ArrayList<BoardImg> selectBoardImgList(){
+		
+		return boardDao.selectBoardImgList();
+	}
+	
 }
 
 

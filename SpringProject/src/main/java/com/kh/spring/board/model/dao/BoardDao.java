@@ -106,4 +106,12 @@ public class BoardDao {
 	public int deleteBoardImage(Map<String, Object> map) {
 		return sqlSession.delete("boardMapper.deleteBoardImage",map);
 	}
+	
+	
+	// FileDeleteScheduler 클래스 - 파일 삭제
+	// 1. BOARD_IMG 테이블 안에 있는 목록들을 모두 조회
+	public ArrayList<BoardImg> selectBoardImgList(){
+		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardImgList");
+	}
+	
 }
