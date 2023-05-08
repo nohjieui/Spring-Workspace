@@ -46,26 +46,25 @@ public class FileDeleteScheduler {
 		// path가 참조하고 있는 폴더에 들어가서 모든 파일을 File 배열로 얻어오기
 		File[] pathList = path.listFiles(); // listFiles() : 디렉토리의 파일목록(디렉토리 포함)을 File배열로 반환한다.
 		// pathList 에는 주소값이 들어있음
-	
 		
 		// [방법1]반복문 돌리면서 pathList에 들어있는 값 하나씩 빼기
-		for(File f: pathList) {
-			String str = f.getName(); // getName() : 경로 이름으로 표시된 파일 또는 디렉터리의 이름을 반환
-			//System.out.println(f);   // 경로를 모두 포함한 파일 ex) C:\Spring-Workspace\SpringProject\src\main\webapp\resources\images\boardT\2023050214151283161.jpg
-			//System.out.println(str); // 파일이름 ex) 2023050214151283161.jpg
+		for(File serverFile: pathList) {
+			String fileName = serverFile.getName(); // getName() : 경로 이름으로 표시된 파일 또는 디렉터리의 이름을 반환
+			//System.out.println(serverFile);   // 경로를 모두 포함한 파일 ex) C:\Spring-Workspace\SpringProject\src\main\webapp\resources\images\boardT\2023050214151283161.jpg
+			//System.out.println(fileName); // 파일이름 ex) 2023050214151283161.jpg
 			
 			boolean isTrue = false;
 			
-			// 3. [방법1]두 목록을 비교해서 일치하지 않는 파일 삭제(삭제시 File클래스의 delete()활용)
+			// 3. 두 목록을 비교해서 일치하지 않는 파일 삭제(삭제시 File클래스의 delete()활용)
 			//    -> 1.배열, 2.배열을 반복문돌리면서 일치여부 확인
 			for(int i = 0; i < list.size(); i++) {
-				if(list.get(i).getChangeName().equals(str)) {
+				if(list.get(i).getChangeName().equals(fileName)) {
 					isTrue =true;
 				}
 			}
 			if(!isTrue) {
-				f.delete();
-				logger.info("파일 삭제함");
+				serverFile.delete();
+				logger.info(fileName+"파일 삭제함");
 			}
 		}
 		
@@ -74,31 +73,26 @@ public class FileDeleteScheduler {
 //		logger.info(list.toString());
 //		logger.info(fileList.toString()); // 풀경로가 저장되어있음
 //		
-//		// 3. [방법2] 두 목록을 비교해서 일치하지 않는 파일 삭제(삭제시 File클래스의 delete()활용)
+//		// 3. 두 목록을 비교해서 일치하지 않는 파일 삭제(삭제시 File클래스의 delete()활용)
 //		if(!list.isEmpty()) {
-//			// server에있는 파일 경로 : C:\Spring-Workspace\SpringProject\src\main\webapp\resources\images\boardT\2023050214151283161.jpg
-//			// list에 있는 파일 경로 : 2023050214151283161.jpg
+//			// server : C:\Spring-Workspace\SpringProject\src\main\webapp\resources\images\boardT\2023050212110628123.jpg
+//			// list : 2023050212110628123.jpg
 //			
-//			for(BoardImg fileName : list) {
-//				
-//				for(File serverFile : fileList) {
-//					logger.info("db에있는?????????????????"+fileName.getChangeName());
-//					String severfileName = serverFile.getName();
-//					logger.info("server에있는?????????????????"+severfileName);
-//					// indexOf 또는 contains 이용
-//					// List.indexOf(value) : List에 vlaue값과 같은 값이 있으면 인덱스를 반환/ 없으면 -1dmf qksghks
-//					if(list.indexOf(fileName) == -1) {
-//						// select해온 db목록에는 없는데 , 실제 웹서버에는 저장된 파일인 경우
-//						logger.info(fileName+"파일 삭제함");
-//						serverFile.delete();
-//						
-//					}
+//			for(File serverFile  : fileList) {
+//				String fileName = serverFile.getName(); // 파일명만 얻어오는 메서드
+//
+//				// [방법2] indexOf or contains 이용
+//				// List.indexOf(value) : List에 value과 같은 값이 있으면 인덱스를 반환/ 없으면 -1을 반환
+//				if(list.indexOf(fileName) == -1) {
+//					// select해온 db목록에는 없는데, 실제 웹서버에는 저장된 파일인경우
+//					logger.info(fileName+"파일 삭제함");
+//					serverFile.delete();
 //				}
+//				
 //			}
 //			
 //		}
-		
-		
+
 		logger.info("서버 파일 삭제 작업 끝");
 	}
 }

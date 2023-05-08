@@ -111,10 +111,10 @@
 			COUNT,
 			BOARD_CONTENT,
 			TO_CHAR(B.CREATE_DATE, 'YYYY"년" MM"월" DD"일" HH24:MI:SS') CREATE_DATE
-			,BI.* <!-- 위의 <collection> 방법2 실행시 주석 해제해야함 -->
+			,BI.* <!-- 위의 <collection> 방법1 실행시 주석해야함 -->
 		FROM BOARD B
-		<!-- JOIN MEMBER M ON M.USER_NO = B.BOARD_WRITER --> <!-- 위의 <collection> 방법1 실행시 주석 해제해야함 -->
-		LEFT JOIN BOARD_IMG BI ON B.BOARD_NO = BI.REF_BNO <!-- 위의 <collection> 방법2 실행시 주석 해제해야함 -->
+		JOIN MEMBER M ON M.USER_NO = B.BOARD_WRITER
+		LEFT JOIN BOARD_IMG BI ON B.BOARD_NO = BI.REF_BNO <!-- 위의 <collection> 방법1 실행시 주석 해제해야함 -->
 		WHERE BOARD_NO = #{boardNo}
 	</select>
 	

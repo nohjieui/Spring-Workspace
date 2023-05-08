@@ -26,7 +26,7 @@
 
 	<!-- MemberController에서 등록한 bean객체는 servlet-context.xml에 등록되어있음.
 		 .xml파일들은 서로연관이 없기 때문에 해당 xml파일에서 따로 bean객체를 등록해줘야함 -->
-	<!-- 3.스케줄러로 사용할 클래스를 bean객체로 등록  -->
+	<!-- 3.스케줄러로 사용할 클래스를 bean객체로 등록 -> 하단의 memberController를 읽어오기 위해서  -->
 	<context:component-scan base-package="com.kh.spring"></context:component-scan>
 	
 	<!-- 2.annotation 활성화 -->
@@ -36,12 +36,14 @@
 		pool-size : 쓰레드 풀 갯수 지정. 지정하지 않으면 기본값 1
 		메인스레드에 영향을 끼치지 않게하기위해서 비동기적으로 사용하기 위해 선언
 	 -->
+	 
+	<!-- <task:scheduled-tasks > 안에 내가 스케줄링할 다양한 메서드들을 계속 추가할 수 있음 -->
 	<task:scheduled-tasks scheduler="khScheduler">
 		<!-- 
 			ref : bean클래스 이름(어노테이션으로 등록한 bean객체의 경우 카멀표기법으로 등록됨)
 			method : 해당 bean클래스에서 스케줄링할 메소드명
 		 -->
-		<task:scheduled ref="memberController" method="testCron" cron="5 * * * * *"/>
+		<task:scheduled ref="memberController" method="testCron" cron="0/5 * * * * *"/>
 		<!-- 
 			cron 표현식
 			*	*	*	* 	* 	 * 	  *
