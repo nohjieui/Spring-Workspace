@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 import com.kh.spring.board.model.service.ReplyService;
 import com.kh.spring.board.model.vo.Reply;
-
-
 /*
  * Rest(Represention State Transfer)
  * : 자원을 이름으로 구분하여 자원의 상태를 주고받는 것
@@ -44,8 +42,16 @@ public class ReplyContoller {
 	}
 	
 	// 댓글 삭제
+	@GetMapping("/delete")
+	public int deleteReply(int replyNo) {
+		return replyService.deleteReply(replyNo);
+	}
 	
 	// 댓글 수정
+	@PostMapping("/update")
+	public int updateReply(Reply reply) {
+		return replyService.updateReply(reply);
+	}
 }
 
 

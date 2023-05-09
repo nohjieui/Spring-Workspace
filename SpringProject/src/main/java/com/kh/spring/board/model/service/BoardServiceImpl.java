@@ -66,6 +66,11 @@ public class BoardServiceImpl implements BoardService{
 	
 	// 게시글 상세 조회 구현 서비스
 	public Board selectBoardDetail(int boardNo) {
+		/*
+		 * AfterThrowingTest에서 AOP 예외처리 테스트
+		 * if(true) { throw new RuntimeException("예외발생"); }
+		 */
+		
 		return boardDao.selectBoardDetail(boardNo);
 	}
 	

@@ -444,7 +444,7 @@ public class MemberController extends QuartzJobBean {
 	
 	
 	public void testQuartz() {
-		System.out.println("콰츠 테스트");
+		//System.out.println("콰츠 테스트");
 		/* memberService.updateMemberChangePwd(); */
 	}
 	

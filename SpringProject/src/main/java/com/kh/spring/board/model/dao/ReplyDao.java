@@ -23,7 +23,14 @@ public class ReplyDao {
 	public List<Reply> selectReplyList(int boardNo){
 		return sqlSession.selectList("replyMapper.selectReplyList",boardNo);
 	}
-	// 댓글 수정
 	
 	// 댓글 삭제
+	public int deleteReply(int replyNo) {
+		return sqlSession.update("replyMapper.deleteReply", replyNo);
+	}
+	
+	// 댓글 수정
+	public int updateReply(Reply reply) {
+		return sqlSession.update("replyMapper.updateReply", reply);
+	}
 }
