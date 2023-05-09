@@ -47,7 +47,7 @@ public class Test {
 		logger.info("================================ Service End ================================");
 	}
 	
-	//@Pointcut을 작성해 놓은 메소드
+	// @Pointcut을 작성해 놓은 메소드
 	// -> Pointcut이 패턴이 작성되는 부분에 testPoincut()메서드 이름을 작성하면, Pointcut에 정의한 패턴이 정의된다
 	@Pointcut("execution(* com.kh.spring.board..*Impl*.*(..))")
 	public void testPointcut() {} // 내용작성x
