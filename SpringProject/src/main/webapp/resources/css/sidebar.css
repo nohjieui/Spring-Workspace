@@ -1,0 +1,104 @@
+:root{
+    --side-bar : 60px;
+    --color-white: rgb(255, 255, 255);
+    --color-navy : rgb(3, 3, 62);
+    --font-size18 : 18px;
+    --font-size15 : 15px;
+    --font-size14 : 14px;
+    --font-size12 : 12px;
+    --font-weight900 : 900;
+    --font-weight700 : 700;
+    --font-weight500 : 500;
+}
+
+/* 사이드바 */
+.sidebar{
+    /* border: 1px solid blue; */
+    width: var(--side-bar);
+    /* width: 300px; */
+    height: 100vh;
+    position: fixed;
+    background-color: var(--color-navy);
+    border-radius: 10px;
+    top: 0;
+    left: 0;
+    transition: width 0.3s;
+    z-index: 1; /* 제일 위로 올라와야함 */
+}
+
+/* 사이드바 오픈 */
+.sidebar:hover {width: 300px;}
+
+/* 로고 */
+.sidebar-logo {
+    padding: 18px;
+    margin-top: 50px;
+}
+
+/* 사이드바 상단 마진 */
+.sidebar-icon-wrap{padding-top: 120px;}
+/* .sidebar-icon-end{padding-top: 65px;} */
+/* ========================== 상위 카테고리 ========================== */
+.sidebar-icon-wrap ul, .sidebar-icon-wrap li{
+    list-style: none;
+    padding: 0;
+}
+.sidebar-icon-wrap a {text-decoration: none;}
+
+/* 아이콘 간격 설정 */
+.sidebar-icon {
+    display: inline-block; /* 패딩 값 주기위해서 */
+    padding: 19px;
+    margin-right: 25px;
+    width: 25px;
+    vertical-align: middle;
+}
+/* 아이콘 크기 */
+.sidebar i{
+    font-size: 22px;
+    line-height: 22px;
+    color: var(--color-white);
+}
+.sidebar-text{
+    font-size: var(--font-size18);
+    font-weight: var(--font-weight700);
+    color: var(--color-white);
+    vertical-align: middle;
+}
+.sidebar-cursor{cursor: pointer;}
+/* 사이드바 화살표 */
+.sidebar-icon-arrow{
+    font-size: 22px;
+    color: var(--color-white);
+}
+
+/* 아코디언 상위 카테고리 위치 설정 */
+.accordion-button-sidebar{white-space: nowrap; padding-bottom: 0;} /* 줄바꿈 없앰 */
+.accordion-button-sidebar .sidebar-text{padding-right: 10px;}
+.accordion-button-sidebar>i{font-size: 12px;}
+
+.accordion-button-sidebar:not(.collapsed) {
+    /* border: none; */
+    /* border-color: white; */
+    background-color: var(--color-navy);
+    /* color: black; */
+}
+
+
+.sidebar-icon-wrap > ul > li > a {
+    display: block;
+    white-space: nowrap; /* 줄바꿈 없앰 */
+}
+
+/* ========================== 하위 카테고리 ========================== */
+.sidebar-more-text{
+    font-size: var(--font-size15);
+    font-weight: var(--font-weight500);
+    color: var(--color-white);
+    display: block;
+    padding: 0 0 14px 65px;
+}
+.sidebar-more-text:hover{
+    color: var(--color-navy);
+}
+

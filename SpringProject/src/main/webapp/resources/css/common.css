@@ -1,0 +1,246 @@
+
+/*폰트설정 : 100;300;400;500;700;900  font-weight: 로 설정가능*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+/*font-family: 'Noto Sans KR', sans-serif; 로 사용!*/
+
+/*변수설정*/
+:root{
+    --side-bar : 60px;
+    --color-navy : rgb(3, 3, 62);
+    --color-gold : #ffc107;
+    --navy-hover:rgba(3, 3, 62, 0.77);
+    --white-hover: rgba(3, 3, 62, 0.09);
+}
+
+.content-wrap{
+    width: calc(100vw - var(--side-bar));
+    margin-left: var(--side-bar);
+    position: relative;
+}
+
+/* 각자 변수 설정하기!!! */
+body{
+  background-color: white;
+  margin: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.btn-primary{
+    border-color:var(--color-navy) ;
+    background-color:var(--color-navy);
+}
+
+.btn-primary:hover{
+    border-color:var(--navy-hover);
+    background-color:var(--navy-hover);
+}
+:not(.btn-check)+.btn:active {
+    border-color:var(--navy-hover);
+    background-color:var(--navy-hover);
+}
+
+.btn:focus-visible {
+    border-color:var(--navy-hover);
+    background-color:var(--navy-hover);
+    box-shadow: none;
+}
+
+.btn-outline-primary{
+    border-color:var(--color-navy) ;
+    color: var(--color-navy);
+}
+
+.btn-outline-primary:hover{
+    background-color: var(--white-hover);
+    color: var(--color-navy);
+    border-color:var(--color-navy) ;
+
+}
+
+/* 공통 테이블 설정 변경 */
+
+/* ★ 맨위 table 태그 클래스에 table-common 추가 후 사용 ★
+    <table class="table-common"> */
+
+/* 테이블 내 모든 텍스트 가운데정렬
+    만약 세부적으로 왼쪽 정렬 필요할 시 그부분에 따로 개인적으로 적용하기 */
+.table-common{
+    text-align: center;
+}
+.table-common>thead{
+    color: var(--color-navy);
+    font-size: 13px;
+    border-bottom: 2px solid var(--color-navy);
+}
+.table-common>tbody>tr{
+    font-size: 11px;
+}
+.table-common>tbody>tr:hover{
+    background-color:var(--white-hover);
+    cursor: pointer;
+}
+
+/* 공통 카테고리 설정 변경 */
+.accordion-item{
+    border: none;
+    border-color: white;
+    background-color: white;
+}
+
+.accordion-button:not(.collapsed) {
+    border: none;
+    border-color: white;
+    background-color: white;
+    color: black;
+}
+.accordion-button:focus {
+    box-shadow: none;
+}
+.accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+/* 카테고리 상위, 하위 css */
+.d-grid{
+    padding-right: 18px;
+    padding-top: 15px;
+}
+.accordion-button{
+    font-weight: 400;
+    font-size: 18px;
+    padding-bottom: 10px;
+}
+ul, li {
+    list-style-type: none;
+}
+.accordion-body {
+    padding-top: 6px;
+    border-top: solid 2px;
+    width: 70%;
+    margin-left: 18px;
+}
+li {
+    text-align: left;
+    margin-left: -3px;
+    font-size: 14px;
+}
+
+/* 상단 제목 (페이지 제목) */
+/* <div class="title-box">
+        <h2 class="title-common">게시판</h2>
+    </div> */
+    .title-box{
+        margin-top: 80px;
+        border-left: 5px solid var(--color-navy);
+    }
+    .title-common{
+        font-weight: 600;
+        color: var(--color-navy);
+        padding-left: 20px;
+}
+    
+
+
+/*페이징*/
+/*페이징 nav를 감싸는 div에 해당 class부여*/
+.pagingArea{
+    width: fit-content;
+    height: 70px;
+    margin: auto;
+}
+.pagination>li>a {
+    font-size: 12px;
+    color: var(--color-navy);
+    border: none;
+}
+.page-link:hover {
+    color: var(--color-navy);
+    border-color:var(--white-hover);
+    background-color:var(--white-hover);
+
+}
+.page-link:focus {
+    color: white;
+    background-color: var(--color-navy);
+    box-shadow: none;
+}
+
+/* 공통 검색창 <html>*/
+/* <div class="search-wrap">
+        <input type="search" name="keyword" class="search-box">
+        <button type="button" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+ */
+.search-wrap{
+    border: 1px solid lightgray;
+    border-radius: 0.3em;
+    margin-left: 5px;
+    height: 30px;
+}
+.search-box{
+    margin-left: 5px;
+    border: none;
+    outline: none;
+    border-radius: 0.3em;
+    width: 350px;
+    height: 28px;
+    font-size: 13px;
+}
+.search-btn{
+    border: none;
+    background: none;
+}
+.search-btn>i{
+    font-size: 15px;
+    color: grey;
+}
+input::-webkit-search-cancel-button{
+    display: none;
+}
+
+/* 부트스트랩 text박스 하늘색 포커스 제거 */
+/* 포커스 넣고싶은 경우 html에 class명 : box-shadow-put 추가  */
+/* 포커스 없애고 싶은 경우 class명 box-shadow-none 추가*/
+/* 둘 중 하나 무조건 추가!! */
+.box-shadow-none{
+    box-shadow: none; 
+}
+.box-shadow-none:focus{
+    border: 1px solid lightgray;
+    box-shadow: none;
+}
+
+/*네이비 아웃라인원하는 사람은 class*/
+.box-shadow-put:focus{
+    border-color: var(--navy-hover); 
+    box-shadow: 0 0 0 0.1rem var(--navy-hover);
+}
+
+/*모딜 form css 수정*/
+
+
+.btn-close:focus {
+    box-shadow: none;
+}
+
+.modal-footer {
+    border-top: none;
+    justify-content: center;
+}
+
+/* 모달창 하단 확인/취소 버튼 */
+/* 버튼 클래스에 해당 클래스 부여 후 사용 */
+.ok-common{
+    width: 17%;
+    border-radius: 10px;
+    font-size: 13px;
+}
+.cancel-common{
+    background-color: white;
+    border: 1px solid rgb(3, 3, 62);
+    border-radius: 10px;
+    color: rgb(3, 3, 62);
+    width: 17%;
+    font-size: 13px;
+}

@@ -49,6 +49,14 @@
 
 	
 	<!-- MemberController는 테스트로 사용한것이고 보통은 FileDeleteScheduler 클래스처럼 스케줄링할 클래스를 생성해서 사용함 -->
+	<!-- 
+		MemberContorller를 bean객체로 만들려면 QuatzJobBean이라는 클래스를 상속받고 있어야 정상적으로 만들어짐
+		MemberController의 기본생성자를 호출해서 만들건데
+		그다음 MemberController안에 들어가는 필드데이터들을 직접 수동으로 넣어줘야 하는데 memberService라는 필드에 memberServiceImpl 객체를 넣어 줄것임
+		위에사도 말했다싶이 기본생성자를 호출하기때문에 memberService의 setter함수 호출해서 setMemberService호출함
+		-> 문제없으면 객체주입이 됨
+	 -->
+	
 	<bean id="job2" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
 		<property name="jobClass" value="com.kh.spring.member.controller.MemberController"/>
 		<property name="jobDataAsMap">

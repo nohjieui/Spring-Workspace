@@ -1,0 +1,98 @@
+:root{
+    --color-light-gray : rgb(235, 235, 235);
+}
+/* 그림자있는 박스 */
+.mypage-wrap{
+    height: 950px;
+    border: 1px solid rgb(235, 235, 235);
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 6%);
+    box-shadow: 5px 5px 15px -5px rgba(221, 221, 221);
+}
+/* 제목 */
+.title-underline{
+    color: var(--color-navy);
+    border-bottom: 1px solid var(--color-light-gray);
+    padding-bottom: 20px;
+    margin: 45px 35px 0px 35px;
+    font-weight: 600;
+}
+
+/* 중앙 content */
+.mypage-content{
+    height: 600px;
+    display: flex;
+    margin-top: 80px;
+}
+/* 왼쪽 사진 영역 */
+.mypage-left{width: 25%;}
+.mypage-profile-box{
+    width: 80px;
+    height: 80px;
+    border-radius: 70%;
+    overflow: hidden;
+    margin: auto;
+}
+.mypage-profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.profile-btn{
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+/* 오른쪽 내용 영역 */
+.mypage-right{width: 75%;}
+.mypage-right label{color: var(--color-navy);}
+
+.row{
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+.mb-4 {
+    margin-bottom: 2rem!important;
+}
+.container{
+    padding-left: 0;
+    padding-right: 0;
+}
+.mypage-input{
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    font-size: 18px;
+}
+/* input박스 가로길이 */
+.form-control {width: 70%;}
+
+.inline-block{
+    display: inline-block;
+    width: auto;
+    margin-left: 10px;
+    margin-right: 5px;
+    font-size: 18px;
+}
+
+
+/* 버튼관련 */
+.text-center{margin-top: 60px;}
+.pass-re{ margin-left: 35px;}
+/* 마이페이지 기본 버튼 크기 */
+.my-btn{width: 90px;}
+
+
+
+
+/* 모달 */
+.modal-title{
+    color: var(--color-navy);
+}
+.change-pwd-div .form-control{width: 100%;}
+.modal-content{padding: 15px 20px;}

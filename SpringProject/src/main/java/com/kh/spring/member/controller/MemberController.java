@@ -95,7 +95,7 @@ public class MemberController extends QuartzJobBean {
 
 	/*
 	 * ?????????????????????????????????????????? spring-quartz.xml -> Job2
-	 * spring-quartz.xml 에서
+	 * spring-quartz.xml
 	 * 
 	 */
 	public MemberController() {
@@ -448,7 +448,7 @@ public class MemberController extends QuartzJobBean {
 	
 	// crontab방식
 	public void testCron() {
-		System.out.println("크론 테스트");
+		//System.out.println("크론 테스트");
 	}
 	
 	
@@ -466,7 +466,6 @@ public class MemberController extends QuartzJobBean {
 	 */
 	@Override
 	public void executeInternal(JobExecutionContext context) throws JobExecutionException{
-		System.out.println("dddd"+memberService);
 		memberService.updateMemberChangePwd();
 	}
 }

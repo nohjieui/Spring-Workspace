@@ -1,0 +1,49 @@
+:root{
+    --color-light-gray : rgb(235, 235, 235);
+}
+/* 그림자있는 박스 */
+.annual-wrap{
+    height: 950px;
+    border: 1px solid rgb(235, 235, 235);
+    border-radius: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 6%);
+    box-shadow: 5px 5px 15px -5px rgba(221, 221, 221);
+}
+.title-underline{
+    color: var(--color-navy);
+    border-bottom: 1px solid var(--color-light-gray);
+    padding-bottom: 20px;
+    margin: 45px 35px 0px 35px;
+    font-weight: 600;
+}
+/* .annual-wrap div{border: 1px solid red;} */
+/* 중앙 content */
+.annual-content{
+    height: 600px;
+    margin: 35px 35px 0 35px;
+}
+
+/* 사원조회 input 박스 */
+#annual-user{
+    width: 200px;
+    display: inline-block;
+}
+
+/* 버튼크기 */
+.my-btn{width: 90px;}
+
+/* 조회한 유저정보 div 크기 설정 */
+.annual-user-info{
+    height: 140px;
+    border: 1px solid var(--color-navy);
+    border-radius: 20px;
+    margin: 25px 0;
+}
+
+/* common.css에 있는 호버효과 x */
+.annual-wrap .table-common>tbody>tr{
+    pointer-events: none;
+}
