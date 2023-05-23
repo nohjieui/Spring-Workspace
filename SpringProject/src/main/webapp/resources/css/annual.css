@@ -3,28 +3,22 @@
 }
 /* 그림자있는 박스 */
 .annual-wrap{
-    height: 950px;
     border: 1px solid rgb(235, 235, 235);
     border-radius: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 6%);
     box-shadow: 5px 5px 15px -5px rgba(221, 221, 221);
+    margin-top: 80px;
+    padding: 45px 35px 120px 35px;
 }
 .title-underline{
     color: var(--color-navy);
     border-bottom: 1px solid var(--color-light-gray);
     padding-bottom: 20px;
-    margin: 45px 35px 0px 35px;
     font-weight: 600;
 }
 /* .annual-wrap div{border: 1px solid red;} */
 /* 중앙 content */
 .annual-content{
-    width: 80%;
-    height: 600px;
-    margin-top: 80px;
+    padding: 40px;
 }
 
 /* 표 */
@@ -32,8 +26,7 @@
     display: flex;
 }
 .annual-table{
-    /* margin: 30px 0; */
-    margin: 30px 20px;
+    margin: 30px 0;
 }
 /* common.css에 있는 호버효과 x */
 .annual-wrap .table-common>tbody>tr{

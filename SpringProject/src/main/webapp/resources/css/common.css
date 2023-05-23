@@ -16,7 +16,7 @@
 .content-wrap{
     width: calc(100vw - var(--side-bar));
     margin-left: var(--side-bar);
-    position: relative;
+    /* position: relative; */
 }
 
 /* 각자 변수 설정하기!!! */
@@ -82,45 +82,48 @@ body{
 }
 
 /* 공통 카테고리 설정 변경 */
-.accordion-item{
+/* ex) <div class="accordion-item accordion-item-common"> 해당 클래스 옆에 클래스-common 추가한 것임!! */
+.accordion-item-common{
     border: none;
     border-color: white;
     background-color: white;
 }
 
-.accordion-button:not(.collapsed) {
+.accordion-button-common:not(.collapsed) {
     border: none;
     border-color: white;
     background-color: white;
     color: black;
 }
-.accordion-button:focus {
+.accordion-button-common:focus {
     box-shadow: none;
 }
-.accordion-button:not(.collapsed)::after {
+.accordion-button-common:not(.collapsed)::after {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
 }
 
 /* 카테고리 상위, 하위 css */
-.d-grid{
+.d-grid-common{
     padding-right: 18px;
     padding-top: 15px;
 }
-.accordion-button{
+.accordion-button-common{
     font-weight: 400;
     font-size: 18px;
     padding-bottom: 10px;
 }
-ul, li {
+/* ul, li */
+.accordion-body-common, .low-common {
     list-style-type: none;
 }
-.accordion-body {
+.accordion-body-common {
     padding-top: 6px;
     border-top: solid 2px;
     width: 70%;
     margin-left: 18px;
 }
-li {
+/*li*/
+.low-common { 
     text-align: left;
     margin-left: -3px;
     font-size: 14px;
@@ -237,7 +240,6 @@ input::-webkit-search-cancel-button{
     font-size: 13px;
 }
 .cancel-common{
-    background-color: white;
     border: 1px solid rgb(3, 3, 62);
     border-radius: 10px;
     color: rgb(3, 3, 62);
