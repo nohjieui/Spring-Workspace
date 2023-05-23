@@ -3,82 +3,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-
-    <!--bootstrap css-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <!-- 부트스트랩 아이콘 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <!-- fontawesome라이브러리추가 다양한 아이콘을 지원함.(EX) 검색용 돋보기 버튼) -->
-    <script src="https://kit.fontawesome.com/a2e8ca0ae3.js" crossorigin="anonymous"></script>
-	<!-- JavaScript Bundle with Popper -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="resources/css/common.css">
-    <link rel="stylesheet" href="resources/css/annual-select.css">
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KH 커뮤니티</title>
+   
+	<!-- 메인페이지에 적용할 css 템플릿 추가  -->
+	<link rel="stylesheet" href="resources/css/main-style.css">
+	<!-- fontawesome라이브러리추가 다양한 아이콘을 지원함.(EX) 검색용 돋보기 버튼) -->
+	<script src="https://kit.fontawesome.com/a2e8ca0ae3.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
+    <div class="main">
+        
+        <!--
+              * 경로 작성 시 최상위경로인 : /webapp  == / 에서부터 실제 파일이 존재하는 위치대로 작성
+        -->
+        <!-- 내부 접근 절대 경로 -->
+        <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
-    <jsp:include page="/WEB-INF/views/sidebar.jsp" />
-    <div class="content-wrap">
-        <div class="annual-wrap container">
-            <!-- 제목 -->
-            <h4 class="title-underline">연차</h4>
-    
-            <!-- 내용부분 -->
-            <div class="annual-content">
-                <div>
-                    <input type="text" class="form-control box-shadow-put" id="annual-user">
-                    <!-- 조회버튼 -->
-                    <button type="button" id="user-select-btn" class="my-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">조회</button>
-                </div>
-                <div class="annual-user-info">
-                    <span id="annual-user-name">노지의</span>
-                    <span id="annual-dept">IT 운영부</span>
-                    <span id="annual-team">개발팀</span>
-                    <span id="annual-only-text">입사일</span>
-                    <span id="annual-hire-date">2019-02-08</span>
-                    <span id="annual-only-text">누적연차</span>
-                    <span id="annual-">4.5</span>
-                    /
-                    <input type="text" value="16">
-                    <div class="profile-btn"><button type="button" class="btn btn-outline-primary btn-sm">수정</button></div>
-                </div>
 
-                <div>
-                    <table class="table table-common">
-                        <thead>
-                            <tr>
-                                <th scope="col">휴가구분</th>
-                                <th scope="col">시작일</th>
-                                <th scope="col">종료일</th>
-                                <th scope="col">휴가일수</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>연차</td>
-                                <td>2022-04-13</td>
-                                <td>2022-04-14</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td>총 사용 연차</td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <div class="content">
+              <!-- 사이트에 유용한 기능을 추가하는 영역 직접 해보기!! -->
+              <div class="content-1">
+               <h3>회원 정보 조회</h3>
 
-            </div>
+               <p>이메일을 입력 받아 일치하는 회원 정보를 출력</p>
+
+               이메일 : <input type="text" id="in1">
+               <button id="select1">조회</button>
+               <div id="result1" style="height:150px"></div>
+
+               <hr>
+
+               <h3>회원 목록 조회</h3>
+
+               <p>일정 시간 마다 비동기로 회원 목록(회원 번호, 이메일, 닉네임) 조회</p>
+
+               <table border="1">
+                   <thead>
+                       <tr>
+                           <th>회원 번호</th>
+                           <th>이메일</th>
+                           <th>닉네임</th>
+                       </tr>
+                   </thead>
+
+
+                   <tbody id="memberList">
+
+                       <tr>
+                           <td>1</td>
+                           <td>user01@kh.or.kr</td>
+                           <td>유저일</td>
+                       </tr>
+
+                       <tr>
+                           <td>2</td>
+                           <td>user02@kh.or.kr</td>
+                           <td>유저이</td>
+                       </tr>
+
+                       <tr>
+                           <td>3</td>
+                           <td>user03@kh.or.kr</td>
+                           <td>유저삼</td>
+                       </tr>
+
+                   </tbody>
+               </table>
+               </div>
+               <div class="content-2">
+               <%-- 로그인이 되어있는 경우 d
+                      회원가입 기능 수정후 다시오자.
+                   --%>
+                <c:if test="${ !empty sessionScope.loginUser}"> 
+                    
+                    <div class="login-area">
+                           <!-- 회원 프로필 이미지 -->
+                       <a href="${contextPath}/member/myPage/profile">
+                               
+                               <c:if test="${empty loginUser.profileImage}">
+                                   <img src="${contextPath}/resources/images/user.jpg" id="member-profile">
+                               </c:if>
+
+                               <c:if test="${!empty loginUser.profileImage}">
+                                   <img src="${contextPath}${loginUser.profileImage}" id="member-profile">
+                               </c:if>
+
+                       </a>
+
+                           <!-- 회원 정보 + 로그아웃 버튼 -->                                       
+                           <div class="my-info">
+                               <div>
+<%--                                <a href="${contextPath}/member/myPage/info" id="nickname">루피</a> --%>
+                                   <a href="${contextPath}/member/myPage/info" id="nickname">${empty loginUser.nickName ? '루피':loginUser.nickName}</a>
+
+                                   <a href="${contextPath}/member/logout" id="logout-btn">로그아웃</a>
+                               </div>
+
+                               <p>
+                                  <!-- alsrudals2022@naver.com -->
+                                   ${empty loginUser.userId ? 'alsrudals93@naver.com':loginUser.userId}
+                               </p>
+                           </div>
+                    </div>
+                 
+                 </c:if>
+               </div>
         </div>
+
     </div>
 
-
-
+    <!-- footer include -->
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 </body>
 </html>
