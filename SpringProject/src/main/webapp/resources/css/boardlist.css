@@ -1,0 +1,127 @@
+
+/* :root{
+    
+} */
+
+
+
+div *{
+    border: px solid red;
+}
+/* 게시판 전체 넓이 고정크기지정 */
+.board-wrap{
+    width: 1000px;
+}
+
+/* 게시판 상단 카테고리 버튼 */
+.board-wrap1{
+    margin-top: 30px;
+}
+.board-title-btn-wrap{
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+
+}
+.board-title-btn{
+    text-decoration-line: none;
+    text-align: center;
+    color: var(--color-navy);
+    font-weight: 600;
+    width: 150px;
+    height: 40px;
+    margin: 0 5px;
+    line-height: 2.5;
+    border-bottom: 1px solid  var(--color-navy);
+}
+.board-title-btn:hover{
+    color: white;
+    background-color: var(--color-navy);
+    border-bottom: 0;
+    border-radius: 0.5em;
+}
+/* 글쓰기 버튼 */
+.board-wrap2{
+    display: flex;
+    justify-content: right;
+    margin-top: 30px;
+}
+
+
+
+
+/* 게시판 타이틀 */
+
+.th1{
+    width: 5%;
+}
+.th3{
+    width: 15%;
+}
+.th4{
+    width: 17%;
+}
+.th5{
+    width: 7%;
+}
+/* 게시판 컨텐츠 제목 */
+
+.list-ctn-title{
+    text-align: left;
+    padding-left: 70px !important;
+    padding-right: 70px !important;
+}
+
+
+
+/* 페이징바 */
+.board-wrap4{
+    height: 50px;
+}
+.pagination>li>a {
+    font-size: 12px;
+}
+
+/* 하단 검색창 */
+.select-box{
+    width: 90px;
+    height: 30px;
+    font-size: 13px;
+    box-shadow: none; 
+}
+.select-box:focus{
+    border: 1px solid lightgray;
+    box-shadow: none;
+}
+.board-wrap5>*{
+    display: flex;
+    justify-content: center;
+}
+.search-wrap{
+    border: 1px solid lightgray;
+    border-radius: 0.3em;
+    margin-left: 5px;
+    height: 30px;
+}
+.search-box{
+    margin-left: 5px;
+    border: none;
+    outline: none;
+    border-radius: 0.3em;
+    width: 350px;
+    height: 28px;
+    font-size: 13px;
+}
+.search-btn{
+    border: none;
+    background: none;
+}
+.search-btn>i{
+    font-size: 15px;
+    color: grey;
+}
+input::-webkit-search-cancel-button{
+    display: none;
+}
+
+
