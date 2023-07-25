@@ -61,8 +61,8 @@
 		
 		SqlSessionFactory : SqlSession을 만드는 객체
 		SqlSessionFactoryBean : mybatis설정파일과 Connection pool정보를 이용하여
-		SqlSessionFactory를 만드는 객체
-		sqlSessionTemplate " SqlSession객체에 트랜잭션처리 역할이 가능하도록 하는 객체
+		sqlSessionFactory를 만드는 객체
+		sqlSessionTemplate : SqlSession객체에 트랜잭션처리 역할이 가능하도록 하는 객체
 	 -->
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
 		<!-- mybatis 설정파일 위치를 지정 -->
