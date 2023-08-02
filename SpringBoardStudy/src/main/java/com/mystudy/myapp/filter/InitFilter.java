@@ -1,0 +1,58 @@
+package com.mystudy.myapp.filter;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpFilter;
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * Servlet Filter implementation class InitFilter
+ */
+@WebFilter(filterName = "InitFilter", urlPatterns = "/*")
+public class InitFilter extends HttpFilter implements Filter {
+
+    /**
+     * Default constructor. 
+     */
+    public InitFilter() {
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see Filter#destroy()
+	 */
+	public void destroy() {
+		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+	 */
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		// contextPath 경로 저장(/myapp) ==> application scope에 저장 할 예정
+		
+		ServletContext application = request.getServletContext();
+		
+		String path = ((HttpServletRequest)request).getContextPath();
+		
+		application.setAttribute("path", path);
+		
+		chain.doFilter(request, response);
+	}
+
+	/**
+	 * @see Filter#init(FilterConfig)
+	 */
+	public void init(FilterConfig fConfig) throws ServletException {
+		// TODO Auto-generated method stub
+	}
+
+}

@@ -7,10 +7,12 @@
 	</settings>
 
 	<typeAliases>
+		<typeAlias type="com.mystudy.myapp.member.model.vo.Member" alias="member"/>
 		<typeAlias type="com.mystudy.myapp.board.model.vo.Board" alias="board"/>
 	</typeAliases>
 	
 	<mappers>
+		<mapper resource="/mappers/member-mapper.xml" />
 		<mapper resource="/mappers/board-mapper.xml" />
 	</mappers>
 </configuration>
